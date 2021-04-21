@@ -4,31 +4,30 @@ include_once 'funcionario.php';
 
 class funcDao{
     private $a;
-    private $con;
     private $fdao;
     private $VALOR;
     private $valor;
     private $try;
     private $nfunc;
     private $funcionario;
-    
-        public function __construct() {
-        $bd = new ConectaBD();
-        $this->con = $bd->ConectaBD();
+    public $nome;
+    public $email;
+    public $senha;
+    public $celular;
+    public $adm;
+    public $funcDAO;
+
+
+    public function __construct($funcionario) {
+        $this->funcionario = $funcionario;
+        $this->con = new ConectaBD();
     }
-    
-    public function inserir($funcionario) {
+
+    public function inserir() {
         try{
-        $try = $this->con->prepare("insert into funcionario "
-                . "(nome, email, senha, nfunc, celular, adm) values (:nome, :email, :senha, :nfunc, :celular, :adm)");
-        $try->bindValue(":nome", $funcionario->getNome());
-        $try->bindValue(":email", $funcionario->getEmail());
-        $try->bindValue(":senha", $funcionario->getSenha());
-        $try->bindValue(":nfunc", $funcionario->getNfunc());
-        $try->bindValue(":celular", $funcionario->getCelular());  
-        $try->bindValue(":adm", $funcionario->getAdm());
-        echo "$try";
-        $try->execute();
+            $try= "INSERT INTO funcionario(nome,email, senha, nfunc, celular, adm)"
+            . " VALUES ('{$this->funcionario->getNome()}','{$this->funcionario->getEmail()}','{$this->funcionario->getSenha()}','{$this->funcionario->getNfunc()}','{$this->funcionario->getCelular()}','{$this->funcionario->getAdm()}')";
+        mysqli_query($con->ConectaBD(), $try);
 
         } catch (Exception $ex) {
             echo $ex->getMessage("retorne para o Inserir");
