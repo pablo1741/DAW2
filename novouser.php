@@ -3,14 +3,18 @@ include_once 'conectabd.php';
 include_once 'funcDAO.php';
 include_once 'funcionario.php';
 
-$funcionario= new funcionario ();
+$funcionario= new funcionario();
 $funcionario->nome=$_POST["nome"];
 $funcionario->email=$_POST["email"];
 $funcionario->senha=$_POST["senha"];
 $funcionario->nfunc=$_POST["nfunc"];
 $funcionario->celular=$_POST["celular"];
 $funcionario->adm=$_POST["adm"];
-$resultado=$funcionario->inserir();
+
+$funcDAO= new funcDao($funcionario);
+
+
+$resultado=$funcDAO->inserir();
 /*
 echo "$funcionario"."<br>";
 if (!isset($funcionario)) {
