@@ -1,17 +1,20 @@
 <?php
 include_once 'conectabd.php';
+include_once 'funcDAO.php';
 
 class funcionario{
-    private $nome;
-    private $email;
-    private $senha;
-    private $nfunc;
-    private $celular;
-    private $adm;
+    public $nome;
+    public $email;
+    public $senha;
+    public $nfunc;
+    public $celular;
+    public $adm;
+    public $con;
     
-    public function __construct($nome, $email, $senha, $nfunc, $celular, $adm) {
+    public function __construct() {
         $bd= new ConectaBD();
         $this->con=$bd->ConectaBD();
+        
         
     }
 
@@ -61,6 +64,14 @@ class funcionario{
 
     public function setAdm($adm) {
         $this->adm = $adm;
+    }
+
+    function getCon() {
+        return $this->con;
+    }
+
+    function setCon($con): void {
+        $this->con = $con;
     }
 
 
